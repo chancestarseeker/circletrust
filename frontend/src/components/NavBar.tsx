@@ -23,6 +23,12 @@ export default function NavBar() {
         >
           Resources
         </Link>
+        <Link
+          to="/health-map"
+          className={`nav-link ${isActive("/health-map") ? "nav-link-active" : ""}`}
+        >
+          Health Map
+        </Link>
         {isTrusted && (
           <>
             <Link

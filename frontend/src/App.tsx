@@ -10,6 +10,7 @@ import MemberDirectory from "./pages/MemberDirectory";
 import AcceptInvitation from "./pages/AcceptInvitation";
 import HelpRequests from "./pages/HelpRequests";
 import CreateInvitation from "./pages/CreateInvitation";
+import HealthMap from "./pages/HealthMap";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -35,6 +36,7 @@ export default function App() {
         {/* Public — pre-trust layer */}
         <Route path="/" element={<ResourceSearch />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/health-map" element={<HealthMap />} />
 
         {/* Auth required, trust NOT required */}
         <Route

@@ -166,3 +166,112 @@ select.search-input {
 textarea.search-input {
   min-height: 60px;
 }
+
+/* --- Health Map --- */
+.health-map-layout {
+  display: flex;
+  gap: 1rem;
+  height: calc(100vh - 160px);
+  min-height: 400px;
+}
+
+.health-map-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.health-map-view {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.health-map-detail {
+  width: 320px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-y: auto;
+}
+
+.health-map-detail h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.health-map-detail .detail-score {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.health-map-legend {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #374151;
+  flex-wrap: wrap;
+}
+
+.health-map-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.health-map-legend .legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.health-sector-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.health-sector-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  background: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.health-sector-item .sector-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .health-map-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .health-map-view {
+    min-height: 350px;
+  }
+
+  .health-map-detail {
+    width: 100%;
+  }
+}

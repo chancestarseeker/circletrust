@@ -35,6 +35,7 @@ export default function TrustGraph() {
   });
   const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const graphRef = useRef<any>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
 
   useEffect(() => {
@@ -49,6 +50,15 @@ export default function TrustGraph() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  // Configure d3 forces for more spacing
+  useEffect(() => {
+    if (graphRef.current) {
+      graphRef.current.d3Force("charge")?.strength(-400).distanceMax(500);
+      graphRef.current.d3Force("link")?.distance(180);
+      graphRef.current.d3Force("center")?.strength(0.05);
+    }
+  }, [graphData]);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -66,7 +76,7 @@ export default function TrustGraph() {
 
   const paintNode = useCallback(
     (node: NodeObject, ctx: CanvasRenderingContext2D) => {
-      const size = node.type === "individual" ? 8 : 12;
+      const size = node.type === "individual" ? 14 : 18;
       const color = TYPE_COLORS[node.type] || "#6b7280";
 
       // Draw node
@@ -99,7 +109,7 @@ export default function TrustGraph() {
       ctx.stroke();
 
       // Draw label
-      ctx.font = "11px system-ui, sans-serif";
+      ctx.font = "13px system-ui, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
       ctx.fillStyle = "#1f2937";
@@ -155,8 +165,9 @@ export default function TrustGraph() {
           nodeCanvasObject={(node: any, ctx: CanvasRenderingContext2D) =>
             paintNode(node as NodeObject, ctx)
           }
+          ref={graphRef}
           nodePointerAreaPaint={(node: any, color: string, ctx: CanvasRenderingContext2D) => {
-            const size = 12;
+            const size = 20;
             ctx.beginPath();
             ctx.arc(node.x ?? 0, node.y ?? 0, size, 0, 2 * Math.PI);
             ctx.fillStyle = color;
@@ -164,9 +175,10 @@ export default function TrustGraph() {
           }}
           linkColor={() => "#d1d5db"}
           linkWidth={2}
-          d3AlphaDecay={0.02}
-          d3VelocityDecay={0.3}
-          cooldownTicks={100}
+          d3AlphaDecay={0.015}
+          d3VelocityDecay={0.25}
+          cooldownTicks={150}
+          onEngineStop={() => graphRef.current?.zoomToFit(400, 60)}
         />
       </div>
     </div>

@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import users
+from app.routers import users, resources, members, invitations, help_requests
 
 app = FastAPI(
     title="CircleTrust API",
@@ -27,6 +27,10 @@ app.add_middleware(
 
 # Routers
 app.include_router(users.router)
+app.include_router(resources.router)
+app.include_router(members.router)
+app.include_router(invitations.router)
+app.include_router(help_requests.router)
 
 
 @app.get("/")

@@ -10,7 +10,7 @@ export default function Login() {
 
   // Redirect to dashboard if already logged in
   useEffect(() => {
-    if (user) navigate("/", { replace: true });
+    if (user) navigate("/dashboard", { replace: true });
   }, [user, navigate]);
 
   const handleGoogleSignIn = async () => {
